@@ -1,0 +1,23 @@
+{
+  "name": "pops-nextjs",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev:next": "next",
+    "build": "next build",
+    "start:next": "next start",
+    "dev:koa": "node server.js",
+    "start:koa": "NODE_ENV=production node server.js"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "koa": "^2.6.2",
+    "koa-router": "^7.4.0",
+    "next": "^7.0.2",
+    "react": "^16.6.1",
+    "react-dom": "^16.6.1",
+    "rxjs": "^6.3.3",
+    "slugify": "^1.3.2"
+  }
+}
