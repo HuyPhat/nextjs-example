@@ -161,35 +161,39 @@ function (_React$Component) {
         var as = slugify(category.title, {
           replacement: '-',
           lower: true
-        }); // as = parentCode + '/' + as + '-' + category.id;
-        // as = 'videolist' + '/' + as + '-' + category.id;
+        });
+        as = parentCode + '/' + as + '-' + category.id; // as = 'videolist' + '/' + as + '-' + category.id;
 
         var href = {
-          pathname: parentCode,
+          pathname: '/tv/videolist',
           query: {
             categoryCode: parentCode,
             subCategoryId: category.id,
             subCategoryTitle: category['title~VI']
           }
-        };
-        var url = '/videolist';
-
-        var handler = function handler() {
-          next_router__WEBPACK_IMPORTED_MODULE_2___default.a.push({
-            pathname: '/videolist',
-            query: {
-              categoryCode: parentCode,
-              subCategoryId: category.id,
-              subCategoryTitle: category['title~VI']
-            }
-          }, parentCode + '/' + as + '-' + category.id);
-        };
+        }; // const url = '/videolist';
+        // const handler = () => {
+        //   Router.push(
+        //     {
+        //       pathname: '/videolist',
+        //       query: {
+        //         categoryCode: parentCode,
+        //         subCategoryId: category.id,
+        //         subCategoryTitle: category['title~VI']
+        //       }
+        //     },
+        //     parentCode + '/' + as + '-' + category.id
+        //   );
+        // };
 
         return react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("li", {
           key: category.id
-        }, react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("button", {
-          onClick: handler
-        }, category['title~VI']));
+        }, react__WEBPACK_IMPORTED_MODULE_0__["createElement"](next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
+          prefetch: true,
+          scroll: false,
+          as: as,
+          href: href
+        }, react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("a", null, category['title~VI'])));
       };
     });
 
@@ -199,7 +203,7 @@ function (_React$Component) {
   _createClass(HomeComponent, [{
     key: "render",
     value: function render() {
-      console.log('homecomponent: ', this.props);
+      // console.log('homecomponent: ', this.props);
       return react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", null, react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("h1", null, "Home Index"), react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("ul", null, this.props.categories.map(this.renderCategoryItems.bind(this))));
     }
   }, {
@@ -226,12 +230,13 @@ function (_React$Component) {
 /*!***********************!*\
   !*** ./http/index.js ***!
   \***********************/
-/*! exports provided: getCategories */
+/*! exports provided: getCategories, getVideoList */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCategories", function() { return getCategories; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getVideoList", function() { return getVideoList; });
 var Axios = __webpack_require__(/*! axios */ "axios");
 
 var BASE_URL = 'https://products.pops.vn/api';
@@ -244,8 +249,28 @@ var instance = Axios.create({
     'api-key': API_KEY
   }
 });
+var URL = {
+  GET_CATEGORIES: '/v1/Categories',
+  GET_VIDEO_LIST: '/v1/Categories'
+};
 var getCategories = function getCategories() {
   return instance.get('/v1/Categories');
+};
+var getVideoList = function getVideoList(_ref) {
+  var id = _ref.id,
+      limit = _ref.limit,
+      sortBy = _ref.sortBy,
+      orderBy = _ref.orderBy,
+      page = _ref.page;
+  return instance.get('/v1/Pages/fetchListVideo', {
+    params: {
+      id: id,
+      limit: limit,
+      sortBy: sortBy,
+      orderBy: orderBy,
+      page: page
+    }
+  });
 };
 
 /***/ }),
@@ -325,10 +350,10 @@ function (_React$Component) {
 
       return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, "Hello World - ", this.props.userAgent), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, "Click", ' ', react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
         prefetch: true,
-        href: "/about"
+        href: "/tv/about"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", null, "here")), ' ', "to read more"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
         prefetch: true,
-        href: "/videolist"
+        href: "/tv/videolist"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", null, "Link Video List"))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_home__WEBPACK_IMPORTED_MODULE_3__["default"], rest));
     }
   }], [{

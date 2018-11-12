@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { getVideoList } from '../http/index';
+import VideoList from '../components/video/list';
 
 // getInitialProps receives a context object with the following properties:
 
@@ -10,20 +12,28 @@ import * as React from 'react';
 // jsonPageRes - Fetch Response object (client only)
 // err - Error object if any error is encountered during the rendering
 
-class VideoList extends React.Component {
+class VideoListPage extends React.Component {
   static async getInitialProps(context) {
-    console.log('video list 2019 - ', context);
-    // console.log('video list 2019 - ', req.url);
-    // console.log('video list 2019 - ', req.params);
-    // const userAgent = req ? req.headers['user-agent'] : navigator.userAgent;
-    // return { userAgent };
-    return {};
+    console.log('VideoList 2019: ', context.query);
+    const { categoryCode, subCatId } = context.query;
+    try {
+      let json = await getVideoList({ id: '5b837f12aec52b58d86a48b5' });
+      console.log('VideoList 2019: ', json.data.data);
+      return { videos: json.data.data };
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   render() {
-    // console.log(this.props);
-    return <div>Video List Worked</div>;
+    console.log('render -> ', this.props);
+    return (
+      <div>
+        <p>Video List Worked</p>
+        <VideoList videos={this.props.videos} />
+      </div>
+    );
   }
 }
 
-export default VideoList;
+export default VideoListPage;

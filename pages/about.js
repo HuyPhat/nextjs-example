@@ -5,7 +5,7 @@ import AboutComponent from '../components/about';
 class AboutPage extends React.Component {
   static async getInitialProps({ req }) {
     const userAgent = req ? req.headers['user-agent'] : navigator.userAgent;
-    console.log('About - ' + userAgent);
+    // console.log('About - ' + userAgent);
     return { userAgent };
   }
   render() {
@@ -14,7 +14,7 @@ class AboutPage extends React.Component {
         About - {this.props.userAgent}
         <div>
           Click{' '}
-          <Link prefetch href="/">
+          <Link prefetch href="/tv">
             <a>here</a>
           </Link>{' '}
           to read more

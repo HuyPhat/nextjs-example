@@ -9,7 +9,7 @@ const slugify = require('slugify');
 
 class HomeComponent extends React.Component {
   render() {
-    console.log('homecomponent: ', this.props);
+    // console.log('homecomponent: ', this.props);
     return (
       <div>
         <h1>Home Index</h1>
@@ -39,36 +39,36 @@ class HomeComponent extends React.Component {
 
   renderSubCategoryItems = parentCode => category => {
     let as = slugify(category.title, { replacement: '-', lower: true });
-    // as = parentCode + '/' + as + '-' + category.id;
+    as = parentCode + '/' + as + '-' + category.id;
     // as = 'videolist' + '/' + as + '-' + category.id;
     const href = {
-      pathname: parentCode,
+      pathname: '/tv/videolist',
       query: {
         categoryCode: parentCode,
         subCategoryId: category.id,
         subCategoryTitle: category['title~VI']
       }
     };
-    const url = '/videolist';
-    const handler = () => {
-      Router.push(
-        {
-          pathname: '/videolist',
-          query: {
-            categoryCode: parentCode,
-            subCategoryId: category.id,
-            subCategoryTitle: category['title~VI']
-          }
-        },
-        parentCode + '/' + as + '-' + category.id
-      );
-    };
+    // const url = '/videolist';
+    // const handler = () => {
+    //   Router.push(
+    //     {
+    //       pathname: '/videolist',
+    //       query: {
+    //         categoryCode: parentCode,
+    //         subCategoryId: category.id,
+    //         subCategoryTitle: category['title~VI']
+    //       }
+    //     },
+    //     parentCode + '/' + as + '-' + category.id
+    //   );
+    // };
     return (
       <li key={category.id}>
-        {/* <Link prefetch scroll={false} as={as} href={href}>
+        <Link prefetch scroll={false} as={as} href={href}>
           <a>{category['title~VI']}</a>
-        </Link> */}
-        <button onClick={handler}>{category['title~VI']}</button>
+        </Link>
+        {/* <button onClick={handler}>{category['title~VI']}</button> */}
       </li>
     );
   };

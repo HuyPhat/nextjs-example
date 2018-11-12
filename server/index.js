@@ -12,8 +12,15 @@ app.prepare().then(() => {
   const router = new Router();
 
   router.get('/ezone/:subcat', async ctx => {
-    // console.log('koa 2019 - query: ', ctx.query);
-    console.log('koa 2019 - req: ', ctx.req.asPath);
+    // console.log('xxx: ', ctx.path);
+    // console.log('koa 2019: ', ctx.params);
+    const categoryCode = ctx.path.split('/')[1];
+    const subCatParams = ctx.params.subcat.split('-');
+    const subCatId = subCatParams[subCatParams.length - 1];
+    ctx.query = {
+      categoryCode,
+      subCatId
+    };
     await app.render(ctx.req, ctx.res, '/videolist', ctx.query);
     ctx.respond = false;
   });

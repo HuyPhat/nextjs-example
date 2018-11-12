@@ -31,13 +31,13 @@ class HomePage extends React.Component {
         <p>Hello World - {this.props.userAgent}</p>
         <div>
           Click{' '}
-          <Link prefetch href="/about">
+          <Link prefetch href="/tv/about">
             <a>here</a>
           </Link>{' '}
           to read more
         </div>
         <div>
-          <Link prefetch href="/videolist">
+          <Link prefetch href="/tv/videolist">
             <a>Link Video List</a>
           </Link>
         </div>

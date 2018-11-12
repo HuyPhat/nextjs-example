@@ -13,4 +13,21 @@ const instance = Axios.create({
   }
 });
 
+const URL = {
+  GET_CATEGORIES: '/v1/Categories',
+  GET_VIDEO_LIST: '/v1/Categories'
+};
+
 export const getCategories = () => instance.get('/v1/Categories');
+
+export const getVideoList = ({ id, limit, sortBy, orderBy, page }) => {
+  return instance.get('/v1/Pages/fetchListVideo', {
+    params: {
+      id,
+      limit,
+      sortBy,
+      orderBy,
+      page
+    }
+  });
+};
